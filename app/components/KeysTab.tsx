@@ -101,7 +101,7 @@ export default function KeysTab({ projectId }: KeysTabProps) {
   .select('*') // <-- You must specify the selection target first
   .eq('project_id', projectId)
   .single();
-    const projectKey = await unwrapProjectKey(envelope.encrypted_data_key, masterKey!);
+    const projectKey = await unwrapProjectKey(envelope.encrypted_data_key, masterKey! as any);
     
     await supabase.from('audit_log').insert({
       action_type: 'SECRET_REVEAL',
