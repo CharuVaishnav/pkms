@@ -50,7 +50,7 @@ export default function IntegrationsTab({ projectId, type }: IntegrationsTabProp
 
     try {
       // Secure delicate credential parameters using core crypto module
-      const encryptedToken = await encryptData(fieldA.trim(), masterKey);
+      const encryptedToken = await encryptData(fieldA.trim(), masterKey as any);
 
       const { error } = await supabase
         .from('hosting_integrations')
