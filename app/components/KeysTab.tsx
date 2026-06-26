@@ -66,7 +66,7 @@ export default function KeysTab({ projectId }: KeysTabProps) {
       return;
     }
 
-    const projectKey = await unwrapProjectKey(envelope.encrypted_data_key, masterKey);
+   const projectKey = await unwrapProjectKey(envelope.encrypted_data_key, masterKey as any);
     const encryptedVal = await encryptData(valueInput, projectKey);
 
     const rotDate = new Date();
