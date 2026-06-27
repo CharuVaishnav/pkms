@@ -20,26 +20,26 @@ export default function Page() {
             </div>
           </div>
 
-          {/* ⚡ 3. Updated buttons to link directly to your software workspace routes */}
+         {/* 🔗 Native Anchor Navigation Links — Forces hard routes past context blocks */}
           <div className="flex items-center gap-1 bg-gray-50 p-1 border border-gray-200 rounded-xl">
-            <button
-              onClick={() => router.push('/')}
-              className="px-4 py-1.5 rounded-lg text-xs font-bold bg-white text-blue-600 shadow-sm"
+            <a
+              href="/"
+              className="px-4 py-1.5 rounded-lg text-xs font-bold bg-white text-blue-600 shadow-sm transition-all"
             >
               📊 Feed Dashboard
-            </button>
-            <button
-              onClick={() => router.push('/dashboard')}
+            </a>
+            <a
+              href="/dashboard"
               className="px-4 py-1.5 rounded-lg text-xs font-bold text-gray-500 hover:text-gray-900 transition-all"
             >
               🔑 Keys Vault
-            </button>
-            <button
-              onClick={() => router.push('/dashboard')}
+            </a>
+            <a
+              href="/dashboard"
               className="px-4 py-1.5 rounded-lg text-xs font-bold text-gray-500 hover:text-gray-900 transition-all"
             >
               ⚙️ Webhook Settings
-            </button>
+            </a>
           </div>
           
           <div className="flex items-center gap-2">
