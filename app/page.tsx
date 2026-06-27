@@ -1,20 +1,13 @@
-'use client'; // Required since we are introducing interactive tab state mechanics
+'use client';
 
-import { useState } from 'react';
+import { useRouter } from 'next/navigation'; // 👇 1. Import the Next.js router tool
 import AuditDashboard from './components/AuditDashboard';
-import KeysTab from './components/KeysTab'; // Importing your keys infrastructure
-import IntegrationsTab from './components/IntegrationsTab'; // Importing your integrations infrastructure
 
 export default function Page() {
-  // 1. Tracks which component layout is currently visible
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'keys' | 'integrations'>('dashboard');
-
-  // Placeholder masterKey state (adjust this context state to match how your app initializes its vault)
-  const [masterKey, setMasterKey] = useState<any>(null);
+  const router = useRouter(); // 2. Initialize the navigation control hook
 
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* Global Navigation Header Mesh */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -27,29 +20,23 @@ export default function Page() {
             </div>
           </div>
 
-          {/* 2. Interactive Navigation Link Array inside the header bar */}
+          {/* ⚡ 3. Updated buttons to link directly to your software workspace routes */}
           <div className="flex items-center gap-1 bg-gray-50 p-1 border border-gray-200 rounded-xl">
             <button
-              onClick={() => setActiveTab('dashboard')}
-              className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                activeTab === 'dashboard' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-500 hover:text-gray-900'
-              }`}
+              onClick={() => router.push('/')}
+              className="px-4 py-1.5 rounded-lg text-xs font-bold bg-white text-blue-600 shadow-sm"
             >
               📊 Feed Dashboard
             </button>
             <button
-              onClick={() => setActiveTab('keys')}
-              className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                activeTab === 'keys' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-500 hover:text-gray-900'
-              }`}
+              onClick={() => router.push('/dashboard')}
+              className="px-4 py-1.5 rounded-lg text-xs font-bold text-gray-500 hover:text-gray-900 transition-all"
             >
               🔑 Keys Vault
             </button>
             <button
-              onClick={() => setActiveTab('integrations')}
-              className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                activeTab === 'integrations' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-500 hover:text-gray-900'
-              }`}
+              onClick={() => router.push('/dashboard')}
+              className="px-4 py-1.5 rounded-lg text-xs font-bold text-gray-500 hover:text-gray-900 transition-all"
             >
               ⚙️ Webhook Settings
             </button>
@@ -64,12 +51,8 @@ export default function Page() {
         </div>
       </header>
 
-      {/* Primary Workspace Layout Framework */}
       <main className="max-w-7xl mx-auto py-6 px-6">
-        {/* 3. Conditional Node Rendering based on active navigation element selection */}
-        {activeTab === 'dashboard' && <AuditDashboard />}
-        {activeTab === 'keys' && <KeysTab masterKey={masterKey} />}
-        {activeTab === 'integrations' && <IntegrationsTab masterKey={masterKey} />}
+        <AuditDashboard />
       </main>
     </div>
   );
